@@ -1,6 +1,16 @@
 $dull-yellow: rgb(232, 191, 80);
 $light-yellow: rgb(250, 234, 147);
 
+#menu {
+	.sub-menu-item {
+		padding-left: 10px;
+	}
+
+	.header-item-count {
+		font-size: 0.8em;
+	}
+}
+
 #topics {
 	header > h1 {
 		/*background-color: $dull-yellow;*/

@@ -1,3 +1,8 @@
+#menu .sub-menu-item {
+  padding-left: 10px; }
+#menu .header-item-count {
+  font-size: 0.8em; }
+
 #topics .bar-stable {
   background-color: #faea93; }
 

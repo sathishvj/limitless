@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, RecentsService) {
 	/*
   // Form data for the login modal
   $scope.loginData = {};
@@ -34,11 +34,32 @@ angular.module('starter.controllers', [])
   };
 	*/
 
+	$scope.expandRecents = true;
+
 	$scope.populateMenu = function()  {
+		$http.get('http://api.frrole.com/categories').then(function(resp) {
+			$scope.categories = resp.data.results[0].categories.sort();
+			//console.log($scope.categories);
+		});
+
+		$http.get('http://api.frrole.com/v1/trending-topics?location=world&timeinterval=3&apikey=Limitless-gkEQg5x6lk5blOl1fx6x53b6cc146b0b4').then(function(resp) {
+			$scope.trending = resp.data.results;
+			//console.log($scope.trending);
+		});
+
+		$scope.recents = RecentsService.get();
+	};
+	$scope.populateMenu();
+
+
+	$scope.showMain = function(val, dontAdd) {
+		if (!dontAdd) {
+			RecentsService.add(val);
+			$scope.recents = RecentsService.get();
+		}
 		
 	};
 
-	$scope.populateMenu();
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -50,9 +71,6 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
 .controller('MainCtrl', function($scope, $stateParams) {
