@@ -1,0 +1,35 @@
+$dull-yellow: rgb(232, 191, 80);
+$light-yellow: rgb(250, 234, 147);
+
+#topics {
+	header > h1 {
+		/*background-color: $dull-yellow;*/
+	}
+
+	.bar-stable {
+		background-color: $light-yellow;
+	}
+}
+
+
+#main {
+	ion-content {
+		height: 100%;
+	}
+
+	background-color: lightgreen;
+
+	.top-row, .bottom-row {
+		/*min-height: 25%;*/
+		background-color: azure;
+		height: 100px;
+	}
+
+	.tweet-row {
+		/*min-height: 50%;*/
+		/*height: 50%;*/
+		height: 200px;
+	}
+}
+
+

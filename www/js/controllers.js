@@ -1,6 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+	/*
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -14,7 +15,7 @@ angular.module('starter.controllers', [])
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
-  },
+  };
 
   // Open the login modal
   $scope.login = function() {
@@ -31,6 +32,13 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+	*/
+
+	$scope.populateMenu = function()  {
+		
+	};
+
+	$scope.populateMenu();
 })
 
 .controller('PlaylistsCtrl', function($scope) {
@@ -46,3 +54,7 @@ angular.module('starter.controllers', [])
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
+
+.controller('MainCtrl', function($scope, $stateParams) {
+})
+;

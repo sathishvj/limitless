@@ -1,1 +1,15 @@
-/* Empty. Add your own CSS if you like */
+#topics .bar-stable {
+  background-color: #faea93; }
+
+#main {
+  background-color: lightgreen; }
+  #main ion-content {
+    height: 100%; }
+  #main .top-row, #main .bottom-row {
+    /*min-height: 25%;*/
+    background-color: azure;
+    height: 100px; }
+  #main .tweet-row {
+    /*min-height: 50%;*/
+    /*height: 50%;*/
+    height: 200px; }
