@@ -1,0 +1,16 @@
+node_modules/
+
+platforms/android/ant-build/*.apk*
+platforms/android/ant-build/*.ap_*
+platforms/android/ant-build/build.prop
+platforms/android/ant-build/AndroidManifest.cordova.xml
+platforms/android/ant-build/proguard.txt
+platforms/android/ant-build/*.dex*
+platforms/android/ant-build/dexedLibs/**/*
+platforms/android/ant-gen/R.java.d
+platforms/android/CordovaLib/ant-build/build.prop
+platforms/android/CordovaLib/ant-build/classes.jar
+platforms/android/assets/www/**
+
+platforms/ios/cordova/console.log
+platforms/ios/www/**
