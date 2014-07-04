@@ -1,4 +1,4 @@
-<ion-side-menus id="topics">
+<ion-side-menus id="topics" id="menu">
   <ion-pane ion-side-menu-content>
     <ion-nav-bar class="bar-stable nav-title-slide-ios7">
       <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
@@ -11,16 +11,61 @@
       <h1 class="title">Topics</h1>
     </header>
     <ion-content class="has-header">
-      <ion-list>
-        <ion-item nav-clear menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
-        </ion-item>
+		<div class="">
+			<label class="item item-input">
+				<i class="icon ion-funnel placeholder-icon"></i>
+				<input type="text" placeholder="Filter" ng-model='pattern'>
+			</label>
+		</div>
+		<ion-list>
+			<div class="item item-divider" ng-click='expandTrending = !expandTrending'>
+					<span ng-show='!expandTrending'>+</span>
+					<span ng-show='expandTrending'>-</span>
+					Trending 
+					<span class='header-item-count'> ({{(trending | filter:pattern).length}}/{{trending.length}} items)</span>
+
+				</div>
+				<div ng-show='expandTrending' class='slide-in-left'>
+					<ion-item ng-repeat='t in trending|filter:pattern' ng-click='showMain(t.entity)'>
+						{{t.entity}}
+					</ion-item>
+				</div>
+      </ion-list>
+		<ion-list>
+			<div class="item item-divider" ng-click='expandCategories = !expandCategories'>
+				<span ng-show='!expandCategories'>+</span>
+				<span ng-show='expandCategories'>-</span>
+				Categories 
+				<span class='header-item-count'> ({{(categories | filter:pattern).length}}/{{categories.length}})</span>
+
+				</div>
+				<div ng-show='expandCategories' class='slide-in-left'>
+					<ion-item ng-repeat='c in categories | filter:pattern' ng-click='showMain(c)' class='sub-menu-item'>
+						{{c}}
+					</ion-item>
+				</div>
+      </ion-list>
+			<ion-list>
+				<div class="item item-divider" ng-click='expandRecents = !expandRecents'>
+					<span ng-show='!expandRecents'>+</span>
+					<span ng-show='expandRecents'>-</span>
+					Recent 
+					<span class='header-item-count'> ({{(recents | filter:pattern).length}}/{{recents.length}} items)</span>
+				</div>
+				<div ng-show='expandRecents' class='slide-in-left'>
+					<ion-item ng-repeat='r in recents |filter:pattern' ng-click='showMain("undefined", "true")'>
+						{{r}}
+					</ion-item>
+				</div>
+      </ion-list>
+			<ion-list>
+					<div class="item item-input-inset">
+						<label class="item item-input">
+							<i class="icon "></i>
+							<input type="text" placeholder="Search" ng-model='searchVal'/>
+						</label>
+						<button ng-click='showMain(searchVal)' class='button icon ion-search' ng-disabled='!searchVal'></button>
+					</div>
       </ion-list>
     </ion-content>
   </ion-side-menu>
