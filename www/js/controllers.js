@@ -144,7 +144,7 @@ angular.module('starter.controllers', [])
 			var imgs = [];
 			for (var j=0; j<parts.length; j++) {
 
-				console.log(parts[j]);
+				//console.log(parts[j]);
 				switch (parts[j].trim().toLowerCase()) {
 					case "facebook":
 						imgs.push('facebook');
@@ -177,7 +177,7 @@ angular.module('starter.controllers', [])
 			//console.log(objs[i].images);
 			imgObjs.push(objs[i]);
 		}
-		console.log('Fmt objs:', imgObjs);
+		//console.log('Fmt objs:', imgObjs);
 		return imgObjs;
 
 	};
@@ -213,7 +213,7 @@ angular.module('starter.controllers', [])
 				
 			}
 			objs[i].fmtText = parts.join(" ");
-			console.log(objs[i].fmtText);
+			//console.log(objs[i].fmtText);
 			fmtObjs.push(objs[i]);
 		}
 		console.log('Fmt objs:', fmtObjs);
