@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, RecentsService) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, RecentsService, $state) {
 	/*
   // Form data for the login modal
   $scope.loginData = {};
@@ -40,11 +40,15 @@ angular.module('starter.controllers', [])
 		$http.get('http://api.frrole.com/categories').then(function(resp) {
 			$scope.categories = resp.data.results[0].categories.sort();
 			//console.log($scope.categories);
+		}, function(errResp) {
+			console.log('AppCtrl:populateMenu(): error getting categories: ', errResp);
 		});
 
 		$http.get('http://api.frrole.com/v1/trending-topics?location=world&timeinterval=3&apikey=Limitless-gkEQg5x6lk5blOl1fx6x53b6cc146b0b4').then(function(resp) {
 			$scope.trending = resp.data.results;
 			//console.log($scope.trending);
+		}, function(errResp) {
+			console.log('AppCtrl:populateMenu(): error getting trending topics: ', errResp);
 		});
 
 		$scope.recents = RecentsService.get();
@@ -57,7 +61,8 @@ angular.module('starter.controllers', [])
 			RecentsService.add(val);
 			$scope.recents = RecentsService.get();
 		}
-		
+	
+		$state.go('app.main', {tag: val});
 	};
 
 })
@@ -73,6 +78,118 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('MainCtrl', function($scope, $stateParams) {
+.controller('MainCtrl', function($scope, $stateParams, $timeout, DelayService, IconsService) {
+	console.log($stateParams);
+	$scope.tag = $stateParams.tag;
+	$scope.showTrials = true;
+
+	var testData = [
+		{
+			text: 'Brazil beats Colombia in WorldCup football',
+			//fmtText: '<span class="fmt-big">Brazil </span>beats Colombia in WorldCup football',
+			images: ['football', 'brazil', 'colombia', 'worldcup', 'happy']
+		},
+		{
+			text: 'Railway fare hike is killing the comman man.',
+			images: ['transport', 'money', 'angry']
+		}
+		];
+
+	$scope.currentItem = {};
+	$scope.currentIndex = -1;
+	$scope.data = [];
+
+	$scope.process = function() {
+		if ($scope.tag === 'demoLimitless') {
+			console.log('Showing with demo data.');
+			$scope.data = getFmtText(testData);
+			//$scope.data = testData;
+			$scope.show($scope.data);
+		}
+
+		// get the data via api if required
+
+		// process the data here
+		
+	};
+
+	var getFmtText = function(objs) {
+		var fmtObjs = [];
+		for (var i=0; i<objs.length; i++) {
+			var parts = objs[i].text.split(" ");
+			for (var j=0; j<parts.length; j++) {
+				var l = parts[j].length;
+				if (l <= 2) {
+					parts[j] = '<span class="fmt-extra-small">'+parts[j]+'</span>';
+				} else if (l>2 && l<=4) {
+					parts[j] = '<span class="fmt-small">'+parts[j]+'</span>';
+				} else if (l>7) {
+					parts[j] = '<span class="fmt-big">'+parts[j]+'</span>';
+				} else {
+					parts[j] = '<span class="fmt-normal">'+parts[j]+'</span>';
+				}
+				
+			}
+			objs[i].fmtText = parts.join(" ");
+			console.log(objs[i].fmtText);
+			fmtObjs.push(objs[i]);
+		}
+		console.log('Fmt objs:', fmtObjs);
+		return fmtObjs;
+	};
+
+	var tweetIndex = 0;
+	var nextTweet = function() {
+		do {
+				if (!$scope.data || $scope.data.length === 0) {
+					console.log('Canceling timeout because no data.');
+					if (tout) { $timeout.cancel(tout); }
+				}
+				console.log('Changing item', tweetIndex,  $scope.data[tweetIndex]);
+				//$scope.currentItem = getFmtText($scope.data[tweetIndex]);
+				$scope.currentItem = $scope.data[tweetIndex];
+				$scope.currentIndex = tweetIndex;
+				tweetIndex++;
+				if (tweetIndex >= $scope.data.length) {tweetIndex = 0;}
+		} while(true);
+	};
+
+	var tout;
+	$scope.show = function() {
+		//tout = $timeout(nextTweet, DelayService.get());
+		$scope.currentIndex = 0;
+		$scope.currentItem = $scope.data[$scope.currentIndex];
+	};
+
+	$scope.$watch(DelayService.get, function(newVal, oldVal) {
+		if (newVal === oldVal) {console.log("Delay changed", newVal, oldVal); return;}
+		console.log('Canceling timeout because delay changed.');
+		if (tout) { $timeout.cancel(tout); }
+	});
+	$scope.process();
+
+	$scope.nextItem = function() {
+		$scope.currentIndex++;
+		if ($scope.currentIndex >= $scope.data.length) {
+			$scope.currentIndex = 0;
+		}
+		$scope.currentItem = $scope.data[$scope.currentIndex];
+	};
+
+	$scope.previousItem = function() {
+
+		$scope.currentIndex--;
+		if ($scope.currentIndex < 0) {
+			$scope.currentIndex = $scope.data.length - 1;
+		}
+		$scope.currentItem = $scope.data[$scope.currentIndex];
+	};
+
+	$scope.getIcon = function(type) {
+		if (!$scope.currentItem || !$scope.currentItem.images || !$scope.currentItem.images.length) {return ""};
+		console.log('Checking icons with:', type, $scope.currentItem.images); 
+		var icon = IconsService.get(type, $scope.currentItem.images);
+		return icon===undefined?"":icon;
+	};
 })
 ;

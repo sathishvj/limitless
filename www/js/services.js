@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('RecentsService', [function($scope) {
+.factory('RecentsService', [function() {
 	var recentsList = [];
 
 	var getRecents = function() {
@@ -22,6 +22,46 @@ angular.module('starter.services', [])
 	return {
 		get: getRecents,
 		add: addRecents
+	};
+}])
+
+.factory('DelayService', [function() {
+	var delay = 1000; //milliseconds
+
+	var getDelay = function(val) {
+		return delay;
+	};
+
+	var setDelay = function() {
+		delay = val;
+	};
+
+	return {
+		get: getDelay,
+		set: setDelay
+	};
+}])
+
+.factory('IconsService', [function() {
+	var iconsList = [
+		{"type": "sport", "name": "football", "icon": "ion-ios7-football-outline"}
+	];
+
+	var getIcon = function(type, images) {
+		for (var i=0; i<iconsList.length; i++) {
+			for (var j=0; j<images.length; j++) {
+				console.log('Checking in with:', type, images[j], iconsList[i]);
+				if (iconsList[i].type === type && iconsList[i].name === images[j]) {
+					console.log("Matched: ", iconsList[i]);
+					return iconsList[i].icon;
+				}
+			}
+		}
+		return undefined;
+	};
+
+	return {
+		get: getIcon
 	};
 }])
 ;

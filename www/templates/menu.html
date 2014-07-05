@@ -22,11 +22,11 @@
 					<span ng-show='!expandTrending'>+</span>
 					<span ng-show='expandTrending'>-</span>
 					Trending 
-					<span class='header-item-count'> ({{(trending | filter:pattern).length}}/{{trending.length}} items)</span>
+					<span class='header-item-count'> ({{(trending | filter:pattern).length}}/{{trending.length}})</span>
 
 				</div>
 				<div ng-show='expandTrending' class='slide-in-left'>
-					<ion-item ng-repeat='t in trending|filter:pattern' ng-click='showMain(t.entity)'>
+					<ion-item ng-repeat='t in trending|filter:pattern' ng-click='showMain(t.entity)' nav-clear menu-close>
 						{{t.entity}}
 					</ion-item>
 				</div>
@@ -40,7 +40,7 @@
 
 				</div>
 				<div ng-show='expandCategories' class='slide-in-left'>
-					<ion-item ng-repeat='c in categories | filter:pattern' ng-click='showMain(c)' class='sub-menu-item'>
+					<ion-item ng-repeat='c in categories | filter:pattern' ng-click='showMain(c)' class='sub-menu-item' nav-clear menu-close>
 						{{c}}
 					</ion-item>
 				</div>
@@ -53,19 +53,22 @@
 					<span class='header-item-count'> ({{(recents | filter:pattern).length}}/{{recents.length}} items)</span>
 				</div>
 				<div ng-show='expandRecents' class='slide-in-left'>
-					<ion-item ng-repeat='r in recents |filter:pattern' ng-click='showMain("undefined", "true")'>
+					<ion-item ng-repeat='r in recents |filter:pattern' ng-click='showMain(r, "true")' nav-clear menu-close>
 						{{r}}
 					</ion-item>
 				</div>
       </ion-list>
-			<ion-list>
-					<div class="item item-input-inset">
-						<label class="item item-input">
-							<i class="icon "></i>
-							<input type="text" placeholder="Search" ng-model='searchVal'/>
-						</label>
-						<button ng-click='showMain(searchVal)' class='button icon ion-search' ng-disabled='!searchVal'></button>
-					</div>
+	  <ion-list>
+		  <div class="item item-input-inset">
+			  <label class="item item-input">
+				  <i class="icon "></i>
+				  <input type="text" placeholder="Search" ng-model='searchVal'/>
+			  </label>
+			  <button ng-click='showMain(searchVal)' class='button icon ion-search' ng-disabled='!searchVal'></button>
+		  </div>
+		  <ion-item ng-click='showMain("demoLimitless", "true")' nav-clear menu-close>
+				Try Test Data
+		  </ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
