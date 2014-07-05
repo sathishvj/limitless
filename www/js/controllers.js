@@ -143,9 +143,8 @@ angular.module('starter.controllers', [])
 			var parts = objs[i].text.split(" ");
 			var imgs = [];
 			for (var j=0; j<parts.length; j++) {
-
 				//console.log(parts[j]);
-				switch (parts[j].trim().toLowerCase()) {
+				switch (parts[j].trim().toLowerCase().replace('#', '')) {
 					case "facebook":
 						imgs.push('facebook');
 						break;
@@ -169,6 +168,12 @@ angular.module('starter.controllers', [])
 						break;
 					case "cloud":
 						imgs.push('cloud');
+						break;
+					case "film":
+					case "cinestars":
+					case "movie":
+					case "movie":
+						imgs.push('film');
 						break;
 
 				}
