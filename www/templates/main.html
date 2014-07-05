@@ -7,11 +7,11 @@
   </ion-nav-buttons>
   <ion-content class="has-header">
 	  <div class="row top-row" >
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
+		  <div class="col tweet-imagery" ng-class='getIcon("corporation")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("weather")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("entertainment")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("social")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("misc")'></div>
 	  </div>
 	  <div class="tweet-row" ng-bind-html='currentItem.fmtText'>
 	  </div>
@@ -23,13 +23,13 @@
 	  -->
 	  <div class="row bottom-row">
 		  <div class="col tweet-imagery" ng-class='getIcon("sport")'></div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
-		  <div class="col">.col</div>
+		  <div class="col tweet-imagery" ng-class='getIcon("emotion")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("finance")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("time")'></div>
+		  <div class="col tweet-imagery" ng-class='getIcon("transport")'></div>
 	  </div>
 
-	  <div class="row">
+	  <div class="row" id="prevNextRow">
 		  <div class="button-bar" ng-show="showTrials">
 			  <button class="button button-clear" ng-click="previousItem()">Previous</button>
 			  <button class="button button-clear" ng-click="nextItem()">Next</button>

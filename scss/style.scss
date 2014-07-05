@@ -33,13 +33,14 @@ $light-yellow: rgb(250, 234, 147);
 
 	.top-row, .bottom-row {
 		/*min-height: 25%;*/
-		background-color: azure;
-		height: 100px;
+		/*background-color: azure;*/
+		height: 60px;
 		padding: 5px;
 	}
 
 	.tweet-row {
 		font-size: 1.5em;
+		line-height: 150%;
 		/*min-height: 50%;*/
 		/*height: 50%;*/
 		/*background-color: lavender;*/
@@ -55,14 +56,14 @@ $light-yellow: rgb(250, 234, 147);
 			padding-right: 5px;
 			padding-left: 5px;
 			font-size: 1.3em;
-			color: blue;
+			color: #4D7696;
 		}
 
 		.fmt-extra-big {
 			padding-right: 8px;
 			padding-left: 8px;
 			font-size: 1.5em;
-			color: purple;
+			color: #9b59b6;
 		}
 
 		.fmt-normal {
@@ -90,8 +91,12 @@ $light-yellow: rgb(250, 234, 147);
 	}
 
 	.tweet-imagery {
-		color: blue;
-		font-size: 2em;
+		color: orange;
+		font-size: 3em;
+	}
+
+	#prevNextRow {
+		margin-top: 50px;
 	}
 
 }
